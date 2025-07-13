@@ -8,12 +8,12 @@ Current feature set:
 Future feature set:
 - LDAP
 
-# Part I: Warewulf, Docker, and iPXE Install
+## Part I: Warewulf, Docker, and iPXE Install
 
-# Part II: NFS Configuration
+## Part II: NFS Configuration
 
-# Part III: Overlays
+## Part III: Overlays
 
-# Part IV: Warewulf Node Configuration
+## Part IV: Warewulf Node Configuration
 
-# Part V: First boot / enroll into cluster
+## Part V: First boot / enroll into cluster
