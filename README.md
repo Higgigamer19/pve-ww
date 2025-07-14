@@ -65,6 +65,43 @@ cp /usr/local/share/ipxe/bin-x86_64-efi-snponly.efi /var/lib/tftpboot/ipxe-snpon
 ```
 Re-run `wwctl configure tftp` and ensure the error went away
 
+### Warewulf Initial Config
+
+Modify the following values in /opt/warewulf/etc/warewulf/warewulf.conf
+```/opt/warewulf/etc/warewulf/warewulf.conf
+ipaddr: 192.168.1.217 #ip of ww node
+netmask: 255.255.255.0
+network: 192.168.1.0 #ip subnet
+dhcp:
+    enabled: true
+    template: default
+    range start: 192.168.1.200
+    range end: 192.168.1.255
+    systemd name: dhcpd
+tftp:
+    enabled: true
+    tftproot: /var/lib/tftpboot
+    systemd name: tftpd-hpa
+    ipxe:
+        00:0B: arm64-efi/snponly.efi
+        "00:00": undionly.kpxe
+        "00:07": ipxe-snponly-x86_64.efi
+        "00:09": ipxe-snponly-x86_64.efi
+nfs:
+    enabled: true
+    export paths:
+        - path: /home
+          export options: rw,sync
+        - path: /opt
+          export options: ro,sync,no_root_squash
+    systemd name: nfs-server
+ssh:
+    key types:
+        - #remove dsa
+paths:
+    ipxesource: /usr/local/share/ipxe
+```
+
 ## NFS Configuration
 
 Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf/etc/warewulf/warewulf.conf`. These nfs shares won't be satisfactory for what we're doing. If using a storage appliance or other node for NFS storage, add the following lines to `/etc/exports`, if you plan on using the warewulf node, append the changes to `/opt/warewulf/share/warewulf/overlays/host/rootfs/etc/exports.ww`
