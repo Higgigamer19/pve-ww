@@ -42,7 +42,7 @@ Download Warewulf's tarball, extract it, and install it.
 git clone -b v4.6.x https://github.com/warewulf/warewulf.git /opt/warewulf/src
 cd /opt/warewulf/src
 make all PREFIX=/opt/warewulf -j$(nproc) 
-sudo make install PREFIX=/opt/warewulf
+make install PREFIX=/opt/warewulf
 go clean -modcache
 ```
 
