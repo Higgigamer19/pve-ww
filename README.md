@@ -287,7 +287,7 @@ z-01:
 And finally, we'll set our node to 'discoverable' so warewulf will assign it the next hardware address that queries iPXE
 
 ```bash
-wwctl node set -discoverable z-01
+wwctl node set --discoverable z-01
 ```
 
 ## 8. Fixing Debian tftp
