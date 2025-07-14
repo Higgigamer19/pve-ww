@@ -75,6 +75,20 @@ Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf
 ```
 In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB subnet, change accordingly.
 
+## Images
+
+Building the node images is very straight-forward; the process is as follows:
+1. Build the container from dockerfile
+2. Export the container to file
+3. Import the file into warewulf
+4. Build the image provisions for sucessful net-booting
+
+This process can take qutie a while, depending on network speed, disk speed, and CPU performance. To avoid babysitting the process, I've written a script and included it in the root of this repo. To build the container from end-to-end, run the following:
+
+```bash
+./push-container.sh
+```
+
 ## Overlays
 
 The following overlays need to be created:
@@ -85,6 +99,32 @@ The following overlays need to be created:
 Examples for these overlays can be found in the `overlays` subdir of this repo
 
 ## Initial State Configuration
+
+Since the nodes are stated using files on an nfs mount, we need to provide the node's initial state for first boot. Thankfully, its initial state happens to be the same as if we didn't mount over the container. In this section, I'm going to refer to the root of our node states dir as `/mnt/pve-node-states`, if yours is different, please change accordingly.
+
+Since We'll be doing this more than once, I'm going create a `/mnt/pve-node-states/base` dir that we'll copy for each node
+
+```bash
+for dir in network pam.d multipath ssh corosync iproute2 apt; do rsync -va --mkpath /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/etc/$dir /mnt/pve-node-states/base/etc/; done
+for dir in ceph corosync lxc pve-cluster pve-firewall pve-manager qemu-server rrdcached; do rsync -va --mkpath /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir /mnt/pve-node-states/base/var/lib/; done
+```
+
+Each node also has it's own overlay provisions that need to be copied. 
+
+First, ensure overlays are build using `wwctl overlay build`, then, we'll copy the base dir to the dir of our future node, in this case, z-01
+
+```bash
+rsync -va /mnt/pve-node-states/{base,z-01}/
+```
+
+Finally, we need to extract the overlay provisions for that node into the dir as well.
+
+```bash
+cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__SYSTEM__.img | cpio -ivdD /mnt/pve-node-states/z-01/
+cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__RUNTIME__.img | cpio -ivdD /mnt/pve-node-states/z-01/
+```
+
+Now our state should be ready for first boot
 
 ## Warewulf Node Configuration
 
