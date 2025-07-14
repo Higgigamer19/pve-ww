@@ -222,7 +222,7 @@ First, let's add a node:
 wwctl node add z-01
 ```
 
-Now, let's edit it's config to be appropriate, issue wwctl node edit z-01, and change the following lines:
+Now, let's edit it's config to be appropriate, issue `wwctl node edit z-01`, and change the following lines:
 
 ```yaml
 z-01:
