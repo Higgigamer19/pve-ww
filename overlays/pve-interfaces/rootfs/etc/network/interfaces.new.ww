@@ -12,13 +12,13 @@
 auto lo
 iface lo inet loopback
 
-iface enp1s0 inet manual
+iface {{.NetDevs.default.Device}} inet manual
 
 auto vmbr0
 iface vmbr0 inet static
 	address {{.NetDevs.default.Ipaddr}}/24
 	gateway 192.168.1.1
-	bridge-ports enp1s0
+	bridge-ports {{.NetDevs.default.Device}}
 	bridge-stp off
 	bridge-fd 0
 
