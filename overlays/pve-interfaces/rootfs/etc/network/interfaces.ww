@@ -12,8 +12,8 @@
 auto lo
 iface lo inet loopback
 
-auto ens18
-iface ens18 inet static
+auto enp1s0
+iface enp1s0 inet static
         address {{.NetDevs.default.Ipaddr}}/24
         gateway 192.168.1.1
 
