@@ -33,7 +33,14 @@ Warewulf is the driving point of this project. Its purpose is to dynamically net
 First, the necessary packages.
 
 ```bash
-apt install golang make build-essential git nfs-kernel-server tftpd-hpa isc-dhcp-server
+apt install \
+    golang \
+    make \
+    build-essential \
+    git \
+    nfs-kernel-server \
+    tftpd-hpa \
+    isc-dhcp-server
 ```
 
 Download Warewulf's tarball, extract it, and install it.
@@ -55,17 +62,7 @@ Debian maintains a very out-of-date, minimal build of docker. A modern fully-fea
 apt install docker.io
 ```
 
-### 1.3. Configure DHCP Interfaces
-
-By default, the dhcp server will attempt to initialize on all interfaces for both ipv4 and ipv6. since our configuration doesn't include ipv6, we'll need to modify this. edit the following line in `/etc/defaults/isc-dhcp-server`:
-
-```conf
-INTERFACESv4="ens18"
-```
-
-where ens18 is the warewulf hosts ip network device.
-
-### 1.4. Install iPXE
+### 1.3. Install iPXE
 
 Building warewulf from source does not include iPXE, so we also need to build it from source. Thankfully, the warewulf repo includes a script that does this.
 
@@ -80,7 +77,7 @@ cp /usr/local/share/ipxe/bin-x86_64-efi-snponly.efi /var/lib/tftpboot/ipxe-snpon
 ```
 Re-run `wwctl configure tftp` and ensure the error went away
 
-### 1.5. Warewulf Initial Config
+### 1.4. Warewulf Initial Config
 
 Modify the following values in /opt/warewulf/etc/warewulf/warewulf.conf
 ```/opt/warewulf/etc/warewulf/warewulf.conf
@@ -116,6 +113,16 @@ ssh:
 paths:
     ipxesource: /usr/local/share/ipxe
 ```
+
+### 1.5. Configure DHCP Interfaces
+
+By default, the dhcp server will attempt to initialize on all interfaces for both ipv4 and ipv6. since our configuration doesn't include ipv6, we'll need to modify this. edit the following line in `/etc/defaults/isc-dhcp-server`:
+
+```conf
+INTERFACESv4="ens18"
+```
+
+where ens18 is the warewulf hosts ip network device.
 
 ### 1.6. Bootstrap warewulf
 
@@ -257,10 +264,10 @@ default:
   network devices:
     default:
       type: ethernet
-      device: enp1s0
+      device: ens18
     ib:
       type: infiniband
-      device: ibp33s0
+      device: ib0
 ```
 
 Finally, We'll set the container image w/ this last change:
