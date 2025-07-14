@@ -29,7 +29,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
     ansiblei \
-    ping
+    iputils-ping
 
 # --- 2. Proxmox Setup ---
 RUN apt-get update && \
