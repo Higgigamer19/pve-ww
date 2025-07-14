@@ -99,6 +99,8 @@ The following overlays need to be created:
 
 Examples for these overlays can be found in the `overlays` subdir of this repo
 
+**Note:** Ensure the network device in pve-interfaces matches what enumerates on your hardware.
+
 ## Initial State Configuration
 
 Since the nodes are stated using files on an nfs mount, we need to provide the node's initial state for first boot. Thankfully, its initial state happens to be the same as if we didn't mount over the container. In this section, I'm going to refer to the root of our node states dir as `/mnt/pve-node-states`, if yours is different, please change accordingly.
@@ -128,5 +130,57 @@ cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__RUNTIME__.img | cpio -i
 Now our state should be ready for first boot
 
 ## Warewulf Node Configuration
+
+Node definition configuration is straightforward. We'll be leveraging warewulf's default profile for most of the heavy lifting. 
+
+First, we'll add our overlays. issue `wwctl profile edit default` and modify the section under overlays to be as follows:
+
+```default
+default:
+  system overlay:
+    - wwinit
+    - wwclient
+    - pve-fstab
+    - hostname
+    - ssh.host_keys
+    - issue
+    - pve-resolv
+    - udev.netname
+    - systemd.netname
+    - ifcfg
+    - wicked
+    - ignition
+    - proxmox.interfaces
+```
+
+Next we'll need to configure our network devices: again, issue the profile edit command and modify to reflect the following:
+```default
+default:
+  network devices:
+    ib:
+      type: infiniband
+      device: ib0
+```
+
+Finally, We'll set the container image w/ this last change:
+```default
+default:
+  image name: pve-ib
+```
+
+## Fixing Debian tftp
+
+Debian's build of tftp has some strange defaults we'll need to change in order for our nodes to boot. Modify `/etc/defaults/tftpd-hpa` to be the following, replace {NODE_IP} with the ip of the node:
+```/etc/defautls/tftpd-hpa
+# /etc/default/tftpd-hpa
+
+TFTP_USERNAME="tftp"
+TFTP_DIRECTORY="/var/lib/tftpboot/"
+TFTP_ADDRESS="{NODE_IP}:69"
+TFTP_OPTIONS="--secure"
+```
+
+Then restart the service.
+
 
 ## First boot / enroll into cluster
