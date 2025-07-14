@@ -255,7 +255,9 @@ default:
     - ifcfg
     - wicked
     - ignition
-    - proxmox.interfaces
+    - pve-fstab
+    - pve-resolv
+    - pve-interfaces
 ```
 
 Next we'll need to configure our network devices: again, issue the profile edit command and modify to reflect the following:
