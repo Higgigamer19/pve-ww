@@ -22,7 +22,7 @@ Minimum VM allocation:
 
 ## 1. Warewulf, Docker, and iPXE Install 
 
-### 1.1. Install Warewulf
+### 1.1. Build & Install Warewulf
 
 Warewulf is the driving point of this project. Its purpose is to dynamically net-boot multiple nodes at once with nearly identical configurations only varying via their overlays.
 
@@ -52,7 +52,7 @@ apt install docker
 
 ### 1.3. Install iPXE
 
-Building warewulf from source does not include iPXE, so we are going to need to also build it from source. Thankfully, the warewulf repo includes a script that does this.
+Building warewulf from source does not include iPXE, so we also need to build it from source. Thankfully, the warewulf repo includes a script that does this.
 
 ```bash
 /opt/warewulf/src/scripts/build-ipxe.sh
@@ -101,6 +101,10 @@ ssh:
 paths:
     ipxesource: /usr/local/share/ipxe
 ```
+
+### 1.5. Bootstrap warewulf
+
+Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure all` to do this. 
 
 ## 2. NFS Configuration
 
