@@ -164,8 +164,15 @@ Since the nodes are stated using files on an nfs mount, we need to provide the n
 Since We'll be doing this more than once, I'm going create a `/mnt/pve-node-states/base` dir that we'll copy for each node
 
 ```bash
-for dir in network pam.d multipath ssh corosync iproute2 apt; do rsync -va --mkpath /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/etc/$dir /mnt/pve-node-states/base/etc/; done
-for dir in ceph corosync lxc pve-cluster pve-firewall pve-manager qemu-server rrdcached; do rsync -va --mkpath /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir /mnt/pve-node-states/base/var/lib/; done
+for dir in network pam.d multipath ssh corosync iproute2 apt ;
+do 
+    rsync -va --mkpath /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/etc/$dir /mnt/pve-node-states/base/etc/ ;
+done
+
+for dir in ceph corosync lxc pve-cluster pve-firewall pve-manager qemu-server rrdcached ;
+do 
+    rsync -va --mkpath /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir /mnt/pve-node-states/base/var/lib/ ;
+done
 ```
 
 Each node also has it's own overlay provisions that need to be copied. 
