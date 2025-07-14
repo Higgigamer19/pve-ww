@@ -43,6 +43,7 @@ git clone -b v4.6.x https://github.com/warewulf/warewulf.git /opt/warewulf/src
 cd /opt/warewulf/src
 make all PREFIX=/opt/warewulf -j$(nproc) 
 make install PREFIX=/opt/warewulf
+echo 'PATH=$PATH:/opt/warewulf/bin' > /etc/profile.d/ww.sh
 go clean -modcache
 ```
 
