@@ -1,6 +1,6 @@
 # pve-ww
 
-Externally stated Proxmox Cluster Net-booting
+Externally stated Proxmox Cluster Net-booting using Warewulf 4
 
 **Warning:** This repo is a Work In Progress. While success has been had, this repo only acts as a guide. Much attention to detail and knowledge of your environment is necessary
 
