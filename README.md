@@ -33,7 +33,7 @@ Warewulf is the driving point of this project. Its purpose is to dynamically net
 First, the necessary packages.
 
 ```bash
-apt install golang make build-essential
+apt install golang make build-essential curl
 ```
 
 Download Warewulf's tarball, extract it, and install it.
