@@ -6,6 +6,7 @@ Current feature-set:
 - Automation for building docker image, importing to warewulf, and re-building in warewulf
 
 Future feature-set:
+- Initial node state automation
 - LDAP
 - CEPH
 
