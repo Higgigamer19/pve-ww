@@ -7,6 +7,7 @@ Current feature-set:
 
 Future feature-set:
 - LDAP
+- CEPH
 
 ## Requirements:
 
