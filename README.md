@@ -59,6 +59,7 @@ apt install docker.io
 Building warewulf from source does not include iPXE, so we also need to build it from source. Thankfully, the warewulf repo includes a script that does this.
 
 ```bash
+mkdir -p /usr/local/share/ipxe
 /opt/warewulf/src/scripts/build-ipxe.sh
 ```
 
