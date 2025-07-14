@@ -43,6 +43,7 @@ git clone -b v4.6.x https://github.com/warewulf/warewulf.git /opt/warewulf/src
 cd /opt/warewulf/src
 make all PREFIX=/opt/warewulf -j$(nproc) 
 sudo make install PREFIX=/opt/warewulf
+go clean -modcache
 ```
 
 ### 1.2. Install Docker
