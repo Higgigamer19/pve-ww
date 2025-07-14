@@ -26,9 +26,6 @@ RUN apt-get update && apt-get install -y \
     ipmitool \
     smartmontools \
     lm-sensors \
-    python3 \
-    python3-pip \
-    ansible \
     iputils-ping
 
 # --- 2. Proxmox Setup ---
