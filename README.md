@@ -337,8 +337,9 @@ Then, on all other nodes, run:
 
 ```bash
 pvecm add {IP_ADDR}
+pvecm updatecerts --force
 ```
-where {IP_ADDR} is the ip or hostname of any node already enroleld
+where {IP_ADDR} is the ip or hostname of any node already enrolled.
 
 Finally, run:
 
