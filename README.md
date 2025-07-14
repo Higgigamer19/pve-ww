@@ -264,10 +264,10 @@ default:
   network devices:
     default:
       type: ethernet
-      device: ens18
+      device: enp1s0
     ib:
       type: infiniband
-      device: ib0
+      device: ibp33s0
 ```
 
 Finally, We'll set the container image w/ this last change:
