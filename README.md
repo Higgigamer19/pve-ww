@@ -169,7 +169,7 @@ do
 done
 ```
 
-Examples for these overlays can be found in the `overlays` subdir of this repo
+Examples for these overlays can be found in the `overlays` subdir of this repo. overlay files can be found at `/opt/warewulf/var/warewulf/overlays`. instructions for managing overlays through warewulf can be found in [warewulf's docs](https://warewulf.org/docs/v4.6.x/overlays/overlays.html)
 
 **Note:** Ensure the network device in pve-interfaces matches what enumerates on your hardware.
 
