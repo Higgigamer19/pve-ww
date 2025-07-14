@@ -60,7 +60,6 @@ Building warewulf from source does not include iPXE, so we also need to build it
 
 ```bash
 /opt/warewulf/src/scripts/build-ipxe.sh
-sed -i 's/\/opt\/warewulf\/ipxe/\/usr\/local\/share\/ipxe/'
 ```
 
 **Note:** the iPXE source tree has changed the name of the build output file. If warewulf complains about a missing `ipxe-snponly-x86_64.efi` during the `wwctl configure all` stage, run the following command:
