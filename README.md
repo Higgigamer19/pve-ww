@@ -51,7 +51,7 @@ sudo make install PREFIX=/opt/warewulf
 Debian maintains a very out-of-date, minimal build of docker. A modern fully-featured build can be installed by using docker's apt reposiotory. Since we only need Docker to pull and build container images, we will use Debian's build.
 
 ```bash
-apt install docker
+apt install docker.io
 ```
 
 ### 1.3. Install iPXE
