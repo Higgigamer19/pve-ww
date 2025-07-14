@@ -1,5 +1,9 @@
 # pve-ww
 
+Externally stated Proxmox Cluster Net-booting
+
+**Warning:** This repo is a Work In Progress. While success has been had, this repo only acts as a guide. Much attention to detail and knowledge of your environment is necessary
+
 Current feature-set:
 - Warewulf overlays for individual node configuration
 - Stated Proxmox config using nfs (over RDMA)
