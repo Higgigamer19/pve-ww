@@ -117,7 +117,7 @@ Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf
 ```
 In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB subnet, change accordingly.
 
-## 3. Images
+## 3. Image Configuration
 
 Building the node images is very straight-forward; the process is as follows:
 1. Build the container from dockerfile
@@ -131,7 +131,7 @@ This process can take qutie a while, depending on network speed, disk speed, and
 ./push-container.sh
 ```
 
-## 4. Overlays
+## 4. Overlay Configuration
 
 The following overlays need to be created:
 - pve-fstab
@@ -248,7 +248,6 @@ TFTP_OPTIONS="--secure"
 ```
 
 Then restart the service.
-
 
 ## 9. First boot / enroll into cluster
 
