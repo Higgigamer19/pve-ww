@@ -20,9 +20,9 @@ Minimum VM allocation:
     
 **Note:** While possible to run these services on debian 12.0, it's not recommended since warewulf's dependency: go is out of date
 
-## Warewulf, Docker, and iPXE Install 
+## 1. Warewulf, Docker, and iPXE Install 
 
-### Step 1. Install Warewulf
+### 1.1. Install Warewulf
 
 Warewulf is the driving point of this project. Its purpose is to dynamically net-boot multiple nodes at once with nearly identical configurations only varying via their overlays.
 
@@ -42,7 +42,7 @@ make all PREFIX=/opt/warewulf -j$(nproc)
 sudo make install PREFIX=/opt/warewulf
 ```
 
-### Step 2. Install Docker
+### 1.2. Install Docker
 
 Debian maintains a very out-of-date, minimal build of docker. A modern fully-featured build can be installed by using docker's apt reposiotory. Since we only need Docker to pull and build container images, we will use Debian's build.
 
@@ -50,7 +50,7 @@ Debian maintains a very out-of-date, minimal build of docker. A modern fully-fea
 apt install docker
 ```
 
-### Step 3. Install iPXE
+### 1.3. Install iPXE
 
 Building warewulf from source does not include iPXE, so we are going to need to also build it from source. Thankfully, the warewulf repo includes a script that does this.
 
@@ -65,7 +65,7 @@ cp /usr/local/share/ipxe/bin-x86_64-efi-snponly.efi /var/lib/tftpboot/ipxe-snpon
 ```
 Re-run `wwctl configure tftp` and ensure the error went away
 
-### Warewulf Initial Config
+### 1.4. Warewulf Initial Config
 
 Modify the following values in /opt/warewulf/etc/warewulf/warewulf.conf
 ```/opt/warewulf/etc/warewulf/warewulf.conf
@@ -102,7 +102,7 @@ paths:
     ipxesource: /usr/local/share/ipxe
 ```
 
-## NFS Configuration
+## 2. NFS Configuration
 
 Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf/etc/warewulf/warewulf.conf`. These nfs shares won't be satisfactory for what we're doing. If using a storage appliance or other node for NFS storage, add the following lines to `/etc/exports`, if you plan on using the warewulf node, append the changes to `/opt/warewulf/share/warewulf/overlays/host/rootfs/etc/exports.ww`
 
@@ -113,7 +113,7 @@ Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf
 ```
 In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB subnet, change accordingly.
 
-## Images
+## 3. Images
 
 Building the node images is very straight-forward; the process is as follows:
 1. Build the container from dockerfile
@@ -127,7 +127,7 @@ This process can take qutie a while, depending on network speed, disk speed, and
 ./push-container.sh
 ```
 
-## Overlays
+## 4. Overlays
 
 The following overlays need to be created:
 - pve-fstab
@@ -138,7 +138,7 @@ Examples for these overlays can be found in the `overlays` subdir of this repo
 
 **Note:** Ensure the network device in pve-interfaces matches what enumerates on your hardware.
 
-## Initial State Configuration
+## 5. Initial State Configuration
 
 Since the nodes are stated using files on an nfs mount, we need to provide the node's initial state for first boot. Thankfully, its initial state happens to be the same as if we didn't mount over the container. In this section, I'm going to refer to the root of our node states dir as `/mnt/pve-node-states`, if yours is different, please change accordingly.
 
@@ -166,7 +166,7 @@ cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__RUNTIME__.img | cpio -i
 
 Now our state should be ready for first boot
 
-## Warewulf Profile Configuration
+## 6. Warewulf Profile Configuration
 
 Node definition configuration is straightforward. We'll be leveraging warewulf's default profile for most of the heavy lifting. 
 
@@ -205,7 +205,7 @@ default:
   image name: pve-ib
 ```
 
-## Warewulf Node Configuration
+## 7. Warewulf Node Configuration
 
 We let the profile do most of our config. config for nodes are only node-specific:
 
@@ -231,7 +231,7 @@ And finally, we'll set our node to 'discoverable' so warewulf will assign it the
 wwctl node set -discoverable z-01
 ```
 
-## Fixing Debian tftp
+## 8. Fixing Debian tftp
 
 Debian's build of tftp has some strange defaults we'll need to change in order for our nodes to boot. Modify `/etc/defaults/tftpd-hpa` to be the following, replace {NODE_IP} with the ip of the node:
 ```conf
@@ -246,6 +246,6 @@ TFTP_OPTIONS="--secure"
 Then restart the service.
 
 
-## First boot / enroll into cluster
+## 9. First boot / enroll into cluster
 
 At this point, Everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
