@@ -267,3 +267,31 @@ Then restart the service.
 ## 9. First boot / enroll into cluster
 
 At this point, Everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
+
+## 10. Enrolling Nodes in a cluster
+
+So far, we have one or more netbooted hypervisors; they are currently all independent on one another. To utilize pve's strongest suit, we need to enroll them in a cluster.
+
+**Note:** It is recommended to have 1-3 fully-stated (standard install) proxmox node to ensure quorum is maintained in a failure state. 
+
+Preferably on a fully-stated node, run the following:
+```bash
+pvecm create {CLUSTER}
+```
+
+where {CLUSTER} is the desired name.
+
+Then, on all other nodes, run:
+
+```bash
+pvecm add {IP_ADDR}
+```
+where {IP_ADDR} is the ip or hostname of any node already enroleld
+
+Finally, run:
+
+```bash
+pvecm status
+```
+
+to ensure everything is working as intended
