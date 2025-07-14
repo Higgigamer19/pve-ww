@@ -248,4 +248,4 @@ Then restart the service.
 
 ## First boot / enroll into cluster
 
-At this point. 
+At this point, Everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
