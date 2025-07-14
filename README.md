@@ -39,9 +39,8 @@ apt install golang make build-essential git
 Download Warewulf's tarball, extract it, and install it.
 
 ```bash
-curl -LO https://github.com/warewulf/warewulf/releases/download/v4.6.2/warewulf-4.6.2.tar.gz
-tar -xf warewulf-4.6.2.tar.gz
-cd warewulf-4.6.2
+git clone https://github.com/warewulf/warewulf.git /opt/warewulf/src
+cd /opt/warewulf/src
 make all PREFIX=/opt/warewulf -j$(nproc) 
 sudo make install PREFIX=/opt/warewulf
 ```
