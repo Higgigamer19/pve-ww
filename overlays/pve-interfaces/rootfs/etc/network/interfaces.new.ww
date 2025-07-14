@@ -22,8 +22,8 @@ iface vmbr0 inet static
 	bridge-stp off
 	bridge-fd 0
 
-auto ibp33s0
-iface ibp33s0 inet static
+auto {{.NetDevs.ib.Device}}
+iface {{.NetDevs.ib.Device}} inet static
         address  {{.NetDevs.ib.Ipaddr}}
         netmask  255.255.255.0
         pre-up modprobe ib_ipoib
