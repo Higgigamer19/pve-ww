@@ -69,7 +69,7 @@ RUN apt-get -y dist-upgrade &>/dev/null
 
 # --- 4. Configure root password and SSH ---
 # RUN echo "root:changeme" | chpasswd
-RUN usermod -p '' root
+RUN usermod -p '$6$2bb08fba-4413-4f$81cUIgoLs4cuu35ao7O07SCqprmk7cTHiCCk9g35Aak8QlRBXIhkTbwHHAUr1twLQ89ml63B2NvlAsWS82Tm80' root
 
 # --- 5. Infiniband installation ---
 RUN sudo apt-get install -y rdma-core libibverbs1 librdmacm1 \

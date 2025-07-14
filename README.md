@@ -122,6 +122,18 @@ In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB 
 
 ## 3. Image Configuration
 
+### 3.1. Image root password creation
+
+In the dockerfile, we've included a line that sets the root password to 'changeme'; the following command will generate a hash of your desired password
+
+```bash
+openssl passwd -6 --salt $(uuidgen)
+```
+
+**Note:** if uuidgen isn't present on the system, install it or replace it with any random string.
+
+### 3.2. Pushing the container
+
 Building the node images is very straight-forward; the process is as follows:
 1. Build the container from dockerfile
 2. Export the container to file
