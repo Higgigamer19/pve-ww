@@ -1,11 +1,11 @@
 # pve-ww
 
-Current feature set:
+Current feature-set:
 - Warewulf overlays for individual node configuration
 - RDMA nfs for pve stated files (pve-cluster, ceph, corosync, etc.)
 - Automation script for building image in docker, importing to warewulf, and re-building in warewulf
 
-Future feature set:
+Future feature-set:
 - LDAP
 
 ## Requirements:
