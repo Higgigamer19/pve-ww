@@ -173,6 +173,7 @@ for dir in \
     iproute2 \
     apt ;
 do 
+    mkdir /mnt/pve-node-states/etc/$dir ;
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/etc/$dir \
         /mnt/pve-node-states/base/etc/ ;
@@ -188,6 +189,7 @@ for dir in \
     qemu-server \
     rrdcached ;
 do 
+    mkdir /mnt/pve-node-states/var/lib/$dir ;
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir \
         /mnt/pve-node-states/base/var/lib/ ;
