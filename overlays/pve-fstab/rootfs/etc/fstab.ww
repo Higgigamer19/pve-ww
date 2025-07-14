@@ -21,7 +21,6 @@ proc /proc proc defaults 0 0
 192.168.1.50:/mnt/homebase/pve-node-states/{{$.Id}} /mnt nfs defaults 0 0
 
 # etc mounts
-#192.168.1.50:/mnt/homebase/pve-node-states/{{$.Id}}/etc	/etc      	nfs       	rw,vers=3,rsize=1048576,wsize=1048576,namlen=255,hard,proto=tcp,timeo=600,retrans=2,sec=sys,mountaddr=192.168.1.50,mountvers=3,mountport=50256,mountproto=udp,local_lock=none,addr=192.168.1.50	0 0
 192.168.1.50:/mnt/homebase/pve-node-states/{{$.Id}}/etc/network		/etc/network		nfs	defaults	0 0
 192.168.1.50:/mnt/homebase/pve-node-states/{{$.Id}}/etc/pam.d		/etc/pam.d		nfs	defaults	0 0
 192.168.1.50:/mnt/homebase/pve-node-states/{{$.Id}}/etc/multipath		/etc/multipath		nfs	defaults	0 0
