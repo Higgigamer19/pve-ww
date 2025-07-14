@@ -64,7 +64,7 @@ mkdir -p /usr/local/share/ipxe
 /opt/warewulf/src/scripts/build-ipxe.sh
 ```
 
-**Note:** the iPXE source tree has changed the name of the build output file. If warewulf complains about a missing `ipxe-snponly-x86_64.efi` during the `wwctl configure all` stage, run the following command:
+**Note:** the iPXE source tree has changed the name of the build output file. If warewulf complains about a missing `ipxe-snponly-x86_64.efi` during the `wwctl configure --all` stage, run the following command:
 ```bash
 cp /usr/local/share/ipxe/bin-x86_64-efi-snponly.efi /var/lib/tftpboot/ipxe-snponly-x86_64.efi
 ```
@@ -109,7 +109,7 @@ paths:
 
 ### 1.5. Bootstrap warewulf
 
-Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure all` to do this. 
+Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure --all` to do this. 
 
 ## 2. NFS Configuration
 
