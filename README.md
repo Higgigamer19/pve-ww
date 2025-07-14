@@ -166,13 +166,13 @@ cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__RUNTIME__.img | cpio -i
 
 Now our state should be ready for first boot
 
-## Warewulf Node Configuration
+## Warewulf Profile Configuration
 
 Node definition configuration is straightforward. We'll be leveraging warewulf's default profile for most of the heavy lifting. 
 
 First, we'll add our overlays. issue `wwctl profile edit default` and modify the section under overlays to be as follows:
 
-```default
+```yaml
 default:
   system overlay:
     - wwinit
@@ -191,7 +191,7 @@ default:
 ```
 
 Next we'll need to configure our network devices: again, issue the profile edit command and modify to reflect the following:
-```default
+```yaml
 default:
   network devices:
     ib:
@@ -200,15 +200,41 @@ default:
 ```
 
 Finally, We'll set the container image w/ this last change:
-```default
+```yaml
 default:
   image name: pve-ib
+```
+
+## Warewulf Node Configuration
+
+We let the profile do most of our config. config for nodes are only node-specific:
+
+First, let's add a node:
+```bash
+wwctl node add z-01
+```
+
+Now, let's edit it's config to be appropriate, issue wwctl node edit z-01, and change the following lines:
+
+```yaml
+z-01:
+  network devices:
+    default:
+      ipaddr: 192.168.1.110
+    ib:
+      ipaddr: 192.168.50.110
+```
+
+And finally, we'll set our node to 'discoverable' so warewulf will assign it the next hardware address that queries iPXE
+
+```bash
+wwctl node set -discoverable z-01
 ```
 
 ## Fixing Debian tftp
 
 Debian's build of tftp has some strange defaults we'll need to change in order for our nodes to boot. Modify `/etc/defaults/tftpd-hpa` to be the following, replace {NODE_IP} with the ip of the node:
-```/etc/defautls/tftpd-hpa
+```conf
 # /etc/default/tftpd-hpa
 
 TFTP_USERNAME="tftp"
@@ -221,3 +247,5 @@ Then restart the service.
 
 
 ## First boot / enroll into cluster
+
+At this point. 
