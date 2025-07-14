@@ -171,8 +171,6 @@ done
 
 Examples for these overlays can be found in the `overlays` subdir of this repo. overlay files can be found at `/opt/warewulf/var/warewulf/overlays`. instructions for managing overlays through warewulf can be found in [warewulf's docs](https://warewulf.org/docs/v4.6.x/overlays/overlays.html)
 
-**Note:** Ensure the network device in pve-interfaces matches what enumerates on your hardware.
-
 ## 5. Initial State Configuration
 
 Since the nodes are stated using files on an nfs mount, we need to provide the node's initial state for first boot. Thankfully, its initial state happens to be the same as if we didn't mount over the container. In this section, I'm going to refer to the root of our node states dir as `/mnt/pve-node-states`, if yours is different, please mount it or change accordingly.
@@ -257,6 +255,9 @@ Next we'll need to configure our network devices: again, issue the profile edit 
 ```yaml
 default:
   network devices:
+    default:
+      type: ethernet
+      device: ens18
     ib:
       type: infiniband
       device: ib0
