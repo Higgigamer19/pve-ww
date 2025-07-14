@@ -160,17 +160,13 @@ This process can take qutie a while, depending on network speed, disk speed, and
 
 ## 4. Overlay Configuration
 
-The following overlays need to be created:
-- pve-fstab
-- pve-resolv
-- pve-interfaces
-
-Run the following commands to create the overlays mentioned above.
+Create the overlays w/ the following:
 
 ```bash
-wwctl overlay create pve-fstab
-wwctl overlay create pve-resolv
-wwctl overlay create pve-interfaces
+for overlay in fstab resolv interfaces ;
+do
+    wwctl overlay create pve-$overlay ;
+done
 ```
 
 Examples for these overlays can be found in the `overlays` subdir of this repo
