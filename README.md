@@ -19,7 +19,7 @@ Minimum VM allocation:
     
 **Note:** While possible to run these services on debian 12.0, it's not recommended since warewulf's dependency: go is out of date
 
-## Part I: Warewulf, Docker, and iPXE Install 
+## Warewulf, Docker, and iPXE Install 
 
 ### Step 1. Install Warewulf
 
@@ -64,7 +64,7 @@ cp /usr/local/share/ipxe/bin-x86_64-efi-snponly.efi /var/lib/tftpboot/ipxe-snpon
 ```
 Re-run `wwctl configure tftp` and ensure the error went away
 
-## Part II: NFS Configuration
+## NFS Configuration
 
 Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf/etc/warewulf/warewulf.conf`. These nfs shares won't be satisfactory for what we're doing. If using a storage appliance or other node for NFS storage, add the following lines to `/etc/exports`, if you plan on using the warewulf node, append the changes to `/opt/warewulf/share/warewulf/overlays/host/rootfs/etc/exports.ww`
 
@@ -75,7 +75,7 @@ Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf
 ```
 In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB subnet, change accordingly.
 
-## Part III: Overlays
+## Overlays
 
 The following overlays need to be created:
 - pve-fstab
@@ -84,8 +84,8 @@ The following overlays need to be created:
 
 Examples for these overlays can be found in the `overlays` subdir of this repo
 
-## Part IV: Initial State Configuration
+## Initial State Configuration
 
-## Part V: Warewulf Node Configuration
+## Warewulf Node Configuration
 
-## Part VI: First boot / enroll into cluster
+## First boot / enroll into cluster
