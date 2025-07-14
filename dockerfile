@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y \
     lm-sensors \
     python3 \
     python3-pip \
-    ansiblei \
+    ansible \
     iputils-ping
 
 # --- 2. Proxmox Setup ---
