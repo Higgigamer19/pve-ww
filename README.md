@@ -255,8 +255,6 @@ default:
     - ifcfg
     - wicked
     - ignition
-    - pve-fstab
-    - pve-resolv
     - pve-interfaces
 ```
 
