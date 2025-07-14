@@ -107,7 +107,17 @@ paths:
     ipxesource: /usr/local/share/ipxe
 ```
 
-### 1.5. Bootstrap warewulf
+### 1.5. Configure DHCP Interfaces
+
+By default, the dhcp server will attempt to initialize on all interfaces for both ipv4 and ipv6. since our configuration doesn't include ipv6, we'll need to modify this. edit the following line in `/etc/defaults/isc-dhcp-server`:
+
+```conf
+INTERFACESv4="ens18"
+```
+
+where ens18 is the warewulf hosts ip network device.
+
+### 1.6. Bootstrap warewulf
 
 Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure --all` to do this. 
 
