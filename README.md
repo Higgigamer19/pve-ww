@@ -165,6 +165,14 @@ The following overlays need to be created:
 - pve-resolv
 - pve-interfaces
 
+Run the following commands to create the overlays mentioned above.
+
+```bash
+wwctl overlay create pve-fstab
+wwctl overlay create pve-resolv
+wwctl overlay create pve-interfaces
+```
+
 Examples for these overlays can be found in the `overlays` subdir of this repo
 
 **Note:** Ensure the network device in pve-interfaces matches what enumerates on your hardware.
