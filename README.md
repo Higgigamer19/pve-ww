@@ -82,7 +82,7 @@ dhcp:
     template: default
     range start: 192.168.1.200
     range end: 192.168.1.255
-    systemd name: dhcpd
+    systemd name: isc-dhcp-server
 tftp:
     enabled: true
     tftproot: /var/lib/tftpboot
