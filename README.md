@@ -33,7 +33,7 @@ Warewulf is the driving point of this project. Its purpose is to dynamically net
 First, the necessary packages.
 
 ```bash
-apt install golang make build-essential git
+apt install golang make build-essential git nfs-kernel-server tftpd-hpa isc-dhcp-server
 ```
 
 Download Warewulf's tarball, extract it, and install it.
