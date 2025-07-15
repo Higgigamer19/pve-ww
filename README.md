@@ -160,7 +160,7 @@ In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB 
 Run the following command to make the changes take place:
 
 ```bash
-systemctl restart nfs
+systemctl restart nfs-server
 ```
 
 ### 2.2. NFS Mount for Warewulf Node (Optional)
@@ -171,7 +171,7 @@ If you have a dedicated storage box your using for your pve states, lets mount i
 {IP_ADDR}:"/desired/path/to/node/states" /mnt/pve-node-states nfs defaults 0 0
 ```
 
-Where {IP_ADDR} is the ip address to your storage box
+Where {IP_ADDR} is the ip address to your storage box.
 
 Run the following command to mount the newly added nfs to your Warewulf box:
 
