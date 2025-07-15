@@ -126,11 +126,13 @@ INTERFACESv4="ens18"
 
 where ens18 is the warewulf hosts ip network device.
 
-### 1.6. Bootstrap warewulf
+### 1.6. Bootstrap Warewulf
 
 Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure --all` to do this. 
 
 ## 2. NFS Configuration
+
+### 2.1 NFS Configuration
 
 Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf/etc/warewulf/warewulf.conf`. These nfs shares won't be satisfactory for what we're doing. If using a storage appliance or other node for NFS storage, add the following lines to `/etc/exports` on your storage box. If you plan on using the warewulf node, append the changes to `/opt/warewulf/share/warewulf/overlays/host/rootfs/etc/exports.ww` on your warewulf box.
 
@@ -140,6 +142,11 @@ Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf
 	192.168.50.0/24(sec=sys,rw,no_root_squash,no_subtree_check)
 ```
 In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB subnet, change accordingly.
+
+
+### 2.2 NFS Mount for Warewulf Node
+
+edit fstab
 
 ## 3. Image Configuration
 
