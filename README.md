@@ -352,7 +352,15 @@ wwctl node set --discoverable z-01
 
 ## 8. First boot / enroll into cluster
 
-At this point, Everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
+At this point, everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
+
+If you'd like to ensure it properly warewulf booted via warewulf, run the following command:
+
+```bash
+wwctl node status
+```
+
+It should end up on "__RUNTIME__.img.gz"
 
 ## 9. Enrolling Nodes in a cluster
 
