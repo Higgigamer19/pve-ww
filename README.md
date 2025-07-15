@@ -163,9 +163,9 @@ Run the following command to make the changes take place:
 systemctl restart nfs-server
 ```
 
-### 2.2. NFS Mount for Warewulf Node (Optional)
+### 2.2. NFS Mount for Warewulf Node (OPTIONAL)
 
-If you have a dedicated storage box your using for your pve states, lets mount it to our Warewulf node. Add the following line to `/etc/fstab` in your Warewulf box:
+If, and only if, you have a dedicated storage box your using for your pve states, lets mount it to our Warewulf node. Add the following line to `/etc/fstab` in your Warewulf box:
 
 ```fstab
 {IP_ADDR}:"/desired/path/to/node/states" /mnt/pve-node-states nfs defaults 0 0
