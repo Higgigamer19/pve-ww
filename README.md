@@ -14,6 +14,8 @@ Future feature-set:
 - LDAP
 - CEPH
 
+![](https://github.com/Higgigamer19/pve-ww/blob/main/pve-ww_480p.gif)
+
 ## Requirements:
 
 For the node / VM running these services, we are using Debian Trixie, but you can use any distro you want. We highly recommend running these services in a VM as they do not require much resources to operate. 
