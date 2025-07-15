@@ -138,11 +138,19 @@ TFTP_ADDRESS="{NODE_IP}:69"
 TFTP_OPTIONS="--secure"
 ```
 
-Then restart the service.
+Then restart the service with the following command:
+
+```bash
+systemctl restart tftpd-hpa
+```
 
 ### 1.7. Bootstrap Warewulf
 
-Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure --all` to do this. 
+Now that the main config is done, we need to boostrap warewulf on the host. Run the following command to do this. 
+
+```bash
+wwctl configure --all
+```
 
 ## 2. NFS Configuration
 
