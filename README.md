@@ -130,9 +130,23 @@ where ens18 is the warewulf hosts ip network device.
 
 Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure --all` to do this. 
 
+### 1.7. Fixing Debian tftp
+
+Debian's build of tftp has some strange defaults we'll need to change in order for our nodes to boot. Modify `/etc/defaults/tftpd-hpa` to be the following, replace {NODE_IP} with the ip of the node:
+```conf
+# /etc/default/tftpd-hpa
+
+TFTP_USERNAME="tftp"
+TFTP_DIRECTORY="/var/lib/tftpboot/"
+TFTP_ADDRESS="{NODE_IP}:69"
+TFTP_OPTIONS="--secure"
+```
+
+Then restart the service.
+
 ## 2. NFS Configuration
 
-### 2.1 NFS Configuration
+### 2.1. NFS Configuration
 
 Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf/etc/warewulf/warewulf.conf`. These nfs shares won't be satisfactory for what we're doing. If using a storage appliance or other node for NFS storage, add the following lines to `/etc/exports` on your storage box. If you plan on using the warewulf node, append the changes to `/opt/warewulf/share/warewulf/overlays/host/rootfs/etc/exports.ww` on your warewulf box.
 
@@ -144,7 +158,7 @@ Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf
 In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB subnet, change accordingly.
 
 
-### 2.2 NFS Mount for Warewulf Node
+### 2.2. NFS Mount for Warewulf Node
 
 edit fstab
 
@@ -311,25 +325,11 @@ And finally, we'll set our node to 'discoverable' so warewulf will assign it the
 wwctl node set --discoverable z-01
 ```
 
-## 8. Fixing Debian tftp
-
-Debian's build of tftp has some strange defaults we'll need to change in order for our nodes to boot. Modify `/etc/defaults/tftpd-hpa` to be the following, replace {NODE_IP} with the ip of the node:
-```conf
-# /etc/default/tftpd-hpa
-
-TFTP_USERNAME="tftp"
-TFTP_DIRECTORY="/var/lib/tftpboot/"
-TFTP_ADDRESS="{NODE_IP}:69"
-TFTP_OPTIONS="--secure"
-```
-
-Then restart the service.
-
-## 9. First boot / enroll into cluster
+## 8. First boot / enroll into cluster
 
 At this point, Everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
 
-## 10. Enrolling Nodes in a cluster
+## 9. Enrolling Nodes in a cluster
 
 So far, we have one or more netbooted hypervisors; they are currently all independent on one another. To utilize pve's strongest suit, we need to enroll them in a cluster.
 
@@ -355,5 +355,6 @@ Finally, run:
 ```bash
 pvecm status
 ```
+
 
 to ensure everything is working as intended
