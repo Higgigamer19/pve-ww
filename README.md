@@ -126,11 +126,7 @@ INTERFACESv4="ens18"
 
 where ens18 is the warewulf hosts ip network device.
 
-### 1.6. Bootstrap Warewulf
-
-Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure --all` to do this. 
-
-### 1.7. Fixing Debian tftp
+### 1.6. Fixing Debian tftp
 
 Debian's build of tftp has some strange defaults we'll need to change in order for our nodes to boot. Modify `/etc/defaults/tftpd-hpa` to be the following, replace {NODE_IP} with the ip of the node:
 ```conf
@@ -143,6 +139,10 @@ TFTP_OPTIONS="--secure"
 ```
 
 Then restart the service.
+
+### 1.7. Bootstrap Warewulf
+
+Now that the main config is done, we need to boostrap warewulf on the host. Run `wwctl configure --all` to do this. 
 
 ## 2. NFS Configuration
 
