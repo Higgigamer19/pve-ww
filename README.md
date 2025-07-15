@@ -132,7 +132,7 @@ Now that the main config is done, we need to boostrap warewulf on the host. Run 
 
 ## 2. NFS Configuration
 
-Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf/etc/warewulf/warewulf.conf`. These nfs shares won't be satisfactory for what we're doing. If using a storage appliance or other node for NFS storage, add the following lines to `/etc/exports` on that box, if you plan on using the warewulf node, append the changes to `/opt/warewulf/share/warewulf/overlays/host/rootfs/etc/exports.ww`
+Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf/etc/warewulf/warewulf.conf`. These nfs shares won't be satisfactory for what we're doing. If using a storage appliance or other node for NFS storage, add the following lines to `/etc/exports` on your storage box. If you plan on using the warewulf node, append the changes to `/opt/warewulf/share/warewulf/overlays/host/rootfs/etc/exports.ww` on your warewulf box.
 
 ```exports
 "/desired/path/to/node/states"\
