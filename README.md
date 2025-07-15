@@ -157,10 +157,27 @@ Warewulf manages NFS for the cluster. Definitions can be found in `/opt/warewulf
 ```
 In our case, `192.168.1.0/24` is our IP subnet, and `192.168.50.0/24` is our IB subnet, change accordingly.
 
+Run the following command to make the changes take place:
 
-### 2.2. NFS Mount for Warewulf Node
+```bash
+systemctl restart nfs
+```
 
-edit fstab
+### 2.2. NFS Mount for Warewulf Node (Optional)
+
+If you have a dedicated storage box your using for your pve states, lets mount it to our Warewulf node. Add the following line to `/etc/fstab` in your Warewulf box:
+
+```fstab
+{IP_ADDR}:"/desired/path/to/node/states" /mnt/pve-node-states nfs defaults 0 0
+```
+
+Where {IP_ADDR} is the ip address to your storage box
+
+Run the following command to mount the newly added nfs to your Warewulf box:
+
+```bash
+mount -a
+```
 
 ## 3. Image Configuration
 
