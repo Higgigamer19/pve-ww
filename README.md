@@ -360,7 +360,7 @@ If you'd like to ensure it properly warewulf booted via warewulf, run the follow
 wwctl node status
 ```
 
-It should end up on "__RUNTIME__.img.gz"
+It should end up on "\_\_RUNTIME__.img.gz"
 
 ## 9. Enrolling Nodes in a cluster
 
