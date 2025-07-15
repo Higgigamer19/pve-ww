@@ -151,7 +151,7 @@ In the dockerfile, we've included a line that sets the root password to 'changem
 openssl passwd -6 --salt $(uuidgen)
 ```
 
-**Note:** if uuidgen isn't present on the system, install it or replace it with any random string.
+**Note:** if uuidgen isn't present on the system, install it (`apt install uuid-runtime`) or replace it with any random string.
 
 ### 3.2. Pushing the container
 
