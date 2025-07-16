@@ -176,7 +176,7 @@ systemctl restart nfs-server
 If, and only if, you have a dedicated storage box your using for your pve states, lets mount it to our Warewulf node. Add the following line to `/etc/fstab` in your Warewulf box:
 
 ```fstab
-{IP_ADDR}:"/desired/path/to/node/states" /mnt/pve-node-states nfs defaults 0 0
+{IP_ADDR}:/desired/path/to/node/states /mnt/pve-node-states nfs defaults 0 0
 ```
 
 Where {IP_ADDR} is the ip address to your storage box.
