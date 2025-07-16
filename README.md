@@ -236,7 +236,6 @@ Since We'll be doing this more than once, I'm going create a `/mnt/pve-node-stat
 for dir in \
     network \
     pam.d \
-    multipath \
     ssh \
     corosync \
     iproute2 \
@@ -255,14 +254,15 @@ for dir in \
     pve-cluster \
     pve-firewall \
     pve-manager \
-    qemu-server \
-    rrdcached ;
+    qemu-server ;
 do 
     mkdir -p /mnt/pve-node-states/var/lib/$dir ;
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir \
         /mnt/pve-node-states/base/var/lib/ ;
 done
+
+mkdir -p /mnt/pve-node-states/var/lib/rrdcached
 ```
 
 Each node also has it's own overlay provisions that need to be copied. 
