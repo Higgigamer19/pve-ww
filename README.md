@@ -207,7 +207,7 @@ Building the node images is very straight-forward; the process is as follows:
 3. Import the file into warewulf
 4. Build the image provisions for sucessful net-booting
 
-This process can take qutie a while, depending on network speed, disk speed, and CPU performance. To avoid babysitting the process, I've written a script and included it in the root of this repo. To build the container from end-to-end, run the following:
+This process can take quite a while, depending on network speed, disk speed, and CPU performance. To avoid babysitting the process, I've written a script and included it in the root of this repo. To build the container from end-to-end, run the following:
 
 ```bash
 ./push-container.sh
