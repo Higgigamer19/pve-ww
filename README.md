@@ -146,9 +146,10 @@ systemctl restart tftpd-hpa
 
 ### 1.7. Bootstrap Warewulf
 
-Now that the main config is done, we need to boostrap warewulf on the host. Run the following command to do this. 
+Now that the main config is done, we need to start the services and boostrap warewulf on the host. Run the following command to do this. 
 
 ```bash
+systemctl enable tftpd-hpa warewulfd nfs-server --now
 wwctl configure --all
 ```
 
@@ -244,7 +245,7 @@ do
     mkdir -p /mnt/pve-node-states/etc/$dir ;
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/etc/$dir \
-        /mnt/pve-node-states/base/etc/ ;
+        /mnt/pve-node-states/z-base/etc/ ;
 done
 
 for dir in \
@@ -259,28 +260,11 @@ do
     mkdir -p /mnt/pve-node-states/var/lib/$dir ;
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir \
-        /mnt/pve-node-states/base/var/lib/ ;
+        /mnt/pve-node-states/z-base/var/lib/ ;
 done
 
-mkdir -p /mnt/pve-node-states/var/lib/rrdcached
+mkdir -p /mnt/pve-node-states/z-base/var/lib/rrdcached
 ```
-
-Each node also has it's own overlay provisions that need to be copied. 
-
-First, ensure overlays are build using `wwctl overlay build`, then, we'll copy the base dir to the dir of our future node, in this case, z-01
-
-```bash
-rsync -va /mnt/pve-node-states/{base,z-01}/
-```
-
-Finally, we need to extract the overlay provisions for that node into the dir as well.
-
-```bash
-cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__SYSTEM__.img | cpio -ivdD /mnt/pve-node-states/z-01/
-cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__RUNTIME__.img | cpio -ivdD /mnt/pve-node-states/z-01/
-```
-
-Now our state should be ready for first boot
 
 ## 6. Warewulf Profile Configuration
 
@@ -344,13 +328,28 @@ z-01:
       ipaddr: 192.168.50.110
 ```
 
+Each node also has it's own overlay provisions that need to be copied. 
+
+First, ensure overlays are build using `wwctl overlay build`, then, we'll copy the base dir to the dir of our future node, in this case, z-01
+
+```bash
+rsync -va /mnt/pve-node-states/{z-base,z-01}/
+```
+
+Finally, we need to extract the overlay provisions for that node into the dir as well.
+
+```bash
+cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__SYSTEM__.img | cpio -ivdD /mnt/pve-node-states/z-01/
+cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__RUNTIME__.img | cpio -ivdD /mnt/pve-node-states/z-01/
+```
+
 And finally, we'll set our node to 'discoverable' so warewulf will assign it the next hardware address that queries iPXE
 
 ```bash
 wwctl node set --discoverable z-01
 ```
 
-## 8. First boot / enroll into cluster
+## 8. First boot
 
 At this point, everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
 
