@@ -242,7 +242,6 @@ for dir in \
     iproute2 \
     apt ;
 do 
-    mkdir -p /mnt/pve-node-states/etc/$dir ;
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/etc/$dir \
         /mnt/pve-node-states/z-base/etc/ ;
@@ -257,7 +256,6 @@ for dir in \
     pve-manager \
     qemu-server ;
 do 
-    mkdir -p /mnt/pve-node-states/var/lib/$dir ;
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir \
         /mnt/pve-node-states/z-base/var/lib/ ;
