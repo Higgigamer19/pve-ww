@@ -27,7 +27,7 @@ iface {{.NetDevs.ib.Device}} inet static
         address  {{.NetDevs.ib.Ipaddr}}
         netmask  255.255.255.0
         pre-up modprobe ib_ipoib
-        pre-up echo connected > /sys/class/net/ibo1/mode
+        pre-up echo connected > /sys/class/net/{{.NetDevs.ib.Device}}/mode
         mtu 65520
 
 source /etc/network/interfaces.d/*
