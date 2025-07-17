@@ -310,10 +310,11 @@ default:
 
 We let the profile do most of our config. config for nodes are only node-specific:
 
-First, let's add a node:
+First, let's add a node with our script:
 ```bash
-wwctl node add z-01
+./new-nodes.sh z-01
 ```
+Change default base image (`base`) with `-b {baseImage}` and default stated location (`/mnt/pve-node-states`) with `-l {statedLocation}`.
 
 Now, let's edit it's config to be appropriate, issue `wwctl node edit z-01`, and change the following lines:
 
@@ -326,20 +327,12 @@ z-01:
       ipaddr: 192.168.50.110
 ```
 
-Each node also has it's own overlay provisions that need to be copied. 
-
-First, ensure overlays are build using `wwctl overlay build`, then, we'll copy the base dir to the dir of our future node, in this case, z-01
+Finally, we need to extract the overlay provisions for that node into the dir using one of the included scripts:
 
 ```bash
-rsync -va /mnt/pve-node-states/{base,z-01}/
+./update-overlays
 ```
-
-Finally, we need to extract the overlay provisions for that node into the dir as well.
-
-```bash
-cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__SYSTEM__.img | cpio -ivdD /mnt/pve-node-states/z-01/
-cat /opt/warewulf/var/warewulf/provision/overlays/z-01/__RUNTIME__.img | cpio -ivdD /mnt/pve-node-states/z-01/
-```
+Change default stated location (`/mnt/pve-node-states`) with `-l {statedLocation}`.
 
 And finally, we'll set our node to 'discoverable' so warewulf will assign it the next hardware address that queries iPXE
 
