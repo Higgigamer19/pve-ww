@@ -244,7 +244,7 @@ for dir in \
 do 
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/etc/$dir \
-        /mnt/pve-node-states/z-base/etc/ ;
+        /mnt/pve-node-states/base/etc/ ;
 done
 
 for dir in \
@@ -258,10 +258,10 @@ for dir in \
 do 
     rsync -va --mkpath \
         /opt/warewulf/var/warewulf/chroots/pve-ib/rootfs/var/lib/$dir \
-        /mnt/pve-node-states/z-base/var/lib/ ;
+        /mnt/pve-node-states/base/var/lib/ ;
 done
 
-mkdir -p /mnt/pve-node-states/z-base/var/lib/rrdcached
+mkdir -p /mnt/pve-node-states/base/var/lib/rrdcached
 ```
 
 ## 6. Warewulf Profile Configuration
@@ -331,7 +331,7 @@ Each node also has it's own overlay provisions that need to be copied.
 First, ensure overlays are build using `wwctl overlay build`, then, we'll copy the base dir to the dir of our future node, in this case, z-01
 
 ```bash
-rsync -va /mnt/pve-node-states/{z-base,z-01}/
+rsync -va /mnt/pve-node-states/{base,z-01}/
 ```
 
 Finally, we need to extract the overlay provisions for that node into the dir as well.
