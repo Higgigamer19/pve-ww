@@ -7,7 +7,10 @@ Externally stated Proxmox Cluster Net-booting using Warewulf 4
 Current feature-set:
 - Warewulf overlays for individual node configuration
 - Stated Proxmox config using nfs (over RDMA)
-- Automation for building docker image, importing to warewulf, and re-building in warewulf
+- Automation Scripts
+	- `./push-container`: Automation for building docker image, importing to warewulf, and re-building in warewulf
+	- `./new-nodes`: Automation for creating new nodes and rsync base fs to new fs
+	- `./update-overlays`: Automation for (re)building overlays and uploading them to nodes' fs
 
 Future feature-set:
 - Initial node state automation
