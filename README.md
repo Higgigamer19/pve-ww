@@ -45,7 +45,8 @@ apt install \
     git \
     nfs-kernel-server \
     tftpd-hpa \
-    isc-dhcp-server
+    isc-dhcp-server \
+    jq
 ```
 
 Download Warewulf's tarball, extract it, and install it.
