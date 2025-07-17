@@ -316,7 +316,7 @@ First, let's add a node with our script:
 ```bash
 ./new-nodes.sh z-01
 ```
-Change default base image (`base`) with `-b {baseImage}` and default stated location (`/mnt/pve-node-states`) with `-l {statedLocation}`.
+**NOTE:** Change default base image (`base`) with `-b {baseImage}` and default stated location (`/mnt/pve-node-states`) with `-l {statedLocation}`.
 
 Now, let's edit it's config to be appropriate, issue `wwctl node edit z-01`, and change the following lines:
 
@@ -334,7 +334,7 @@ Finally, we need to extract the overlay provisions for that node into the dir us
 ```bash
 ./update-overlays
 ```
-Change default stated location (`/mnt/pve-node-states`) with `-l {statedLocation}`.
+**NOTE:** Change default stated location (`/mnt/pve-node-states`) with `-l {statedLocation}`.
 
 And finally, we'll set our node to 'discoverable' so warewulf will assign it the next hardware address that queries iPXE
 
@@ -396,7 +396,7 @@ Preferably on a fully-stated node, run the following:
 pvecm create {CLUSTER}
 ```
 
-where {CLUSTER} is the desired name.
+Where {CLUSTER} is the desired name. 
 
 Then, on all other nodes, run:
 
