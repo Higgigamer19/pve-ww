@@ -386,5 +386,12 @@ Finally, run:
 pvecm status
 ```
 
-
 to ensure everything is working as intended
+
+## 10. Final Notes
+
+When added to a cluster, there is a known bug where the network devices wont show up in the GUI, to fix this, make a dummy network device (we always do vmbr1) and it will fix the issues. We have not done scaled testing so please don't deploy mission critical VMs on this solution, although we believe it would be safe, there might be something we overlooked. 
+
+Finally, we would like to thank you for using our solution and we hope this was what you were looking for. If you have any suggestions or issues, please post them in issues and we will try to fix/integrate when we can.
+
+
