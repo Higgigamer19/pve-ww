@@ -308,6 +308,8 @@ default:
 
 ## 7. Warewulf Node Configuration
 
+### 7.1. Deploying a Single Node
+
 We let the profile do most of our config. config for nodes are only node-specific:
 
 First, let's add a node with our script:
@@ -340,7 +342,38 @@ And finally, we'll set our node to 'discoverable' so warewulf will assign it the
 wwctl node set --discoverable z-01
 ```
 
-## 8. First boot
+### 7.2. Deploying Multiple Nodes At Once
+
+So you want to bring up an entire proxmox cluster at once? We can do that! First we need to add the respective nodes, in our case z-01 through z-04. Run the following script:
+
+```bash
+./new-nodes.sh z-{01..04}
+```
+
+Now modify each node's IP config by running the following command:
+
+```bash
+wwctl node set z-{01..04} \
+--ipaddr=192.168.1.{110,120,210,220}
+
+wwctl node set z-{01..04} \
+--netname=infiniband \
+--ipaddr=192.168.50.{110,120,210,220}
+```
+
+Next, build and upload their overlays by running this script:
+
+```bash
+./update-overlays
+```
+
+Finally, set the nodes discoverable and they are ready to boot. Note: if you want to control which physical node is which virtual node, set them discoverable and boot them one at a time.
+
+```bash
+wwctl node set z-{01..04} --discoverable
+```
+
+## 8. First Boot
 
 At this point, everything should be ready for you to power on your first Proxmox node. Ensure the node is set to PXE boot in the BIOS and watch it go. It should end up at a tty screen that shows the node's IP, and you should be able to login to the webgui. 
 
@@ -352,7 +385,7 @@ wwctl node status
 
 It should end up on "\_\_RUNTIME__.img.gz"
 
-## 9. Enrolling Nodes in a cluster
+## 9. Enrolling Nodes In A Cluster
 
 So far, we have one or more netbooted hypervisors; they are currently all independent on one another. To utilize pve's strongest suit, we need to enroll them in a cluster.
 
