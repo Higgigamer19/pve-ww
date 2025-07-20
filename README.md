@@ -368,7 +368,7 @@ wwctl node set z-{01..04} \
 Next, build and upload their overlays by running this script:
 
 ```bash
-./update-overlays
+./update-overlays.sh
 ```
 
 Finally, set the nodes discoverable and they are ready to boot. Note: if you want to control which physical node is which virtual node, set them discoverable and boot them one at a time.
