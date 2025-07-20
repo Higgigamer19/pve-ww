@@ -361,7 +361,7 @@ wwctl node set z-{01..04} \
 --ipaddr=192.168.1.{110,120,210,220}
 
 wwctl node set z-{01..04} \
---netname=infiniband \
+--netname=ib \
 --ipaddr=192.168.50.{110,120,210,220}
 ```
 
